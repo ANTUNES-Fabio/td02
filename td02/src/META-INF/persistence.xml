@@ -6,7 +6,6 @@
   	<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>studentDatabase</jta-data-source>
     <non-jta-data-source>studentDatabaseUnmanaged</non-jta-data-source>
-    <!-- <class>org.depinfonancy.td02.Student</class> -->
     <properties>
 		<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
 		<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>

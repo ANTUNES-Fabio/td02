@@ -1,4 +1,4 @@
-package ord.depinfonancy.td02;
+package org.depinfonancy.td02.test;
 
 import com.vaadin.testbench.ScreenshotOnFailureRule;
 import com.vaadin.testbench.TestBenchTestCase;
