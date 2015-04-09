@@ -14,7 +14,6 @@ import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
@@ -67,6 +66,7 @@ public class Td02UI extends UI {
 					createStudent(studentName.getValue(), studentAddress.getValue(), age);
 					returnMessage = "Student added successfully";
 				}catch(Exception e){
+					System.out.println(e);
 					returnMessage = "An error ocurred, check if you inserted a valid age value on the Student Age box";
 				}
 				System.out.println(returnMessage);
@@ -74,26 +74,27 @@ public class Td02UI extends UI {
 				
 			}
 		});
-		
+		bottom1.addComponent(createStudent);
 		
 		//
-		Button button = new Button("Click Me");
-		button.addClickListener(new Button.ClickListener() {
-			public void buttonClick(ClickEvent event) {
-				layout.addComponent(new Label("Thank you for clicking"));
-			}
-		});
-		layout.addComponent(button);
+//		Button button = new Button("Click Me");
+//		button.addClickListener(new Button.ClickListener() {
+//			public void buttonClick(ClickEvent event) {
+//				layout.addComponent(new Label("Thank you for clicking"));
+//			}
+//		});
+//		layout.addComponent(button);
 	}
 
 	public StudentEJBRemote setup() throws Exception{
+		
 		final Properties p = new Properties();
         p.put("studentDatabase", "new://Resource?type=DataSource");
         p.put("studentDatabase.JdbcDriver", "com.mysql.jdbc.Driver");
         p.put("studentDatabase.JdbcUrl", "jdbc:mysql://localhost:3306/students");
-
+        
         final Context context = EJBContainer.createEJBContainer(p).getContext();
-       
+  
         return (StudentEJBRemote) context.lookup("java:global/td02/StudentEJB");
 	}
 	
