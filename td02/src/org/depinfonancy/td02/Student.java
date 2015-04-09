@@ -24,6 +24,10 @@ public class Student {
         this.age = age;
     }
 
+    public void setStudentID(long studentID){
+    	this.studentID = studentID;
+    }
+    
     public long getStudentID(){
     	return studentID;
     }

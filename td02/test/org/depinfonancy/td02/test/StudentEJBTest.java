@@ -4,10 +4,7 @@ import junit.framework.TestCase;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
-import javax.naming.InitialContext;
-
 import org.depinfonancy.td02.Student;
-import org.depinfonancy.td02.StudentEJB;
 import org.depinfonancy.td02.StudentEJBRemote;
 
 import java.util.List;
