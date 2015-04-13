@@ -5,6 +5,7 @@ import java.util.Properties;
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 import javax.servlet.annotation.WebServlet;
+import javax.ejb.EJB;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
@@ -26,9 +27,17 @@ public class Td02UI extends UI {
 	@VaadinServletConfiguration(productionMode = false, ui = Td02UI.class)
 	public static class Servlet extends VaadinServlet {
 	}
-
+	
+	@EJB
+	private StudentEJBRemote students;
+	
 	@Override
 	protected void init(VaadinRequest request) {
+		try {
+			students = setup();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		final VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
@@ -63,7 +72,7 @@ public class Td02UI extends UI {
 				String returnMessage;
 				try{
 					int age = Integer.parseInt(studentAge.getValue());
-					createStudent(studentName.getValue(), studentAddress.getValue(), age);
+					students.createStudent(new Student(studentName.getValue(), studentAddress.getValue(), age));
 					returnMessage = "Student added successfully";
 				}catch(Exception e){
 					System.out.println(e);
@@ -96,12 +105,5 @@ public class Td02UI extends UI {
         final Context context = EJBContainer.createEJBContainer(p).getContext();
   
         return (StudentEJBRemote) context.lookup("java:global/td02/StudentEJB");
-	}
-	
-	private void createStudent(String name, String address, int age) throws Exception{
-		//Sets up the persistence EJB.
-		StudentEJBRemote students = setup();
-		//Creates the new Student.
-		students.createStudent(new Student(name, address, age));
 	}
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 import javax.ejb.Local;
 
-@Remote
+@Local
 public interface StudentEJBRemote {
 	
 	public List<Student> findStudents() throws Exception;
