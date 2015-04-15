@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+<Resource id="studentDatabase" type="DataSource">
+    JdbcDriver  com.mysql.jdbc.Driver
+    JdbcUrl jdbc:mysql://localhost:3306/test?autoReconnect=true
+    UserName tomas    
+    JtaManaged true
+</Resource>
+</resources>

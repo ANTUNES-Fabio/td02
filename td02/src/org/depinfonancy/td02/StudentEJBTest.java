@@ -1,13 +1,14 @@
 package org.depinfonancy.td02;
 
 import static org.junit.Assert.*;
-import org.junit.Test;
+
+import java.util.List;
+import java.util.Properties;
 
 import javax.ejb.embeddable.EJBContainer;
 import javax.naming.Context;
 
-import java.util.List;
-import java.util.Properties;
+import org.junit.Test;
 
 
 public class StudentEJBTest{
