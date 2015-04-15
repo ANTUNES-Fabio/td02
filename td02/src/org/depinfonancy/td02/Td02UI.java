@@ -1,16 +1,13 @@
 package org.depinfonancy.td02;
 
-import java.util.Properties;
-
-import javax.ejb.embeddable.EJBContainer;
-import javax.naming.Context;
-import javax.servlet.annotation.WebServlet;
-import javax.ejb.EJB;
-
 import java.util.List;
+
+import javax.ejb.EJB;
+import javax.servlet.annotation.WebServlet;
 
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
+import com.vaadin.cdi.CDIUI;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
@@ -23,24 +20,26 @@ import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
-@Theme("td02")
+@Theme("valo")
+@CDIUI
+
 public class Td02UI extends UI {
 
-	@WebServlet(value = "/*", asyncSupported = true)
-	@VaadinServletConfiguration(productionMode = false, ui = Td02UI.class)
-	public static class Servlet extends VaadinServlet {
-	}
+//	@WebServlet(value = "/*", asyncSupported = true)
+//	@VaadinServletConfiguration(productionMode = false, ui = Td02UI.class)
+//	public static class Servlet extends VaadinServlet {
+//	}
 	
 	@EJB
 	private StudentEJBRemote students;
 	
 	@Override
 	protected void init(VaadinRequest request) {
-		try {
-			students = setup();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
+//		try {
+//			students = setup();
+//		} catch (Exception e1) {
+//			e1.printStackTrace();
+//		}
 		
 		final VerticalLayout layout = new VerticalLayout();
 		layout.setMargin(true);
@@ -206,15 +205,4 @@ public class Td02UI extends UI {
 		return returnMessage;
 	}
 	
-	public StudentEJBRemote setup() throws Exception{
-		
-		final Properties p = new Properties();
-        p.put("studentDatabase", "new://Resource?type=DataSource");
-        p.put("studentDatabase.JdbcDriver", "com.mysql.jdbc.Driver");
-        p.put("studentDatabase.JdbcUrl", "jdbc:mysql://localhost:3306/students");
-        
-        final Context context = EJBContainer.createEJBContainer(p).getContext();
-  
-        return (StudentEJBRemote) context.lookup("java:global/td02/StudentEJB");
-	}
 }
